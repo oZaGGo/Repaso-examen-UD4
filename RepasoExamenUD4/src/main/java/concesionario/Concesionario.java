@@ -1,14 +1,14 @@
 package concesionario;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 
 public class Concesionario {
     private String nombre;
     private HashSet<Cliente> clientes = new HashSet<>(); //Los clientes se distinguen por DNI
     private HashMap<Coche,Integer> cochesDisponibles = new HashMap<>();
-    private HashMap<String,Cliente> transacciones = new HashMap<>();
+    private HashMap<Cliente, List<String>> transacciones = new HashMap<>();
+    private ArrayList<String> historialPagos = new ArrayList<>();
 
     public Concesionario() {
     }
@@ -27,13 +27,14 @@ public class Concesionario {
         if (cochesDisponibles.containsKey(coche)){ //Si el coche existe
             if (cochesDisponibles.get(coche).equals(importe)){ //Si el importe se corresponde con el precio
                 //Comprar el coche
-                String mensaje = "Coche: " + coche.getMarca().getNombre() + " " + coche.getModelo() + " por " + importe + "€ el " + LocalDate.now();
+                String linea = "Coche: " + coche.getMarca().getNombre() + " " + coche.getModelo() + " por " + importe + "€ el " + LocalDate.now();
+                historialPagos.add(linea);
                 clientes.add(cliente); //Si el mismo cliente compra 2 veces se añade solo 1 vez
-                transacciones.put(mensaje,cliente);
+                transacciones.put(cliente,historialPagos);
                 cochesDisponibles.remove(coche);
                 cliente.insertarCoche(coche); //Añadir el coche a la lista de coches del cliente
-                String linea = "-" + importe + "€ el " + LocalDate.now();
-                cliente.insertarPago(linea, importe);
+                String linea2 = "-" + importe + "€ el " + LocalDate.now();
+                cliente.insertarPago(linea2, importe);
             }else {
                 throw new Exception("El importe es erroneo! Introduce el importe EXACTO para comprar el coche");
             }
@@ -58,7 +59,7 @@ public class Concesionario {
         return cochesDisponibles;
     }
 
-    public HashMap<String, Cliente> getTransacciones() {
+    public HashMap<Cliente, List<String>> getTransacciones() {
         return transacciones;
     }
 

@@ -5,9 +5,7 @@ import concesionario.Marca;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Stack;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -75,23 +73,25 @@ public class Testeos {
 
         //Podemos imprimir las transacciones de forma ordenada
 
-        HashMap<String, Cliente> transacciones = concesionario.getTransacciones();
+        HashMap<Cliente, List<String>> transacciones = concesionario.getTransacciones();
 
         System.out.println("TRANSACCIONES:");
-        for (String key : transacciones.keySet()){
-            System.out.println("Cliente: " + transacciones.get(key).getNombre() + " " + transacciones.get(key).getApellido());
-            System.out.println(key);
+        for (Cliente key : transacciones.keySet()){
+            System.out.println("Cliente: " + key.getNombre() + " " + key.getApellido());
+            for (String value : transacciones.get(key)){
+                System.out.println(value);
+            }
         }
         System.out.println();
 
 
         //Imprimir el historial del cliente
 
-        Stack<String> historial = ivan.getHistorialPagos();
+        LinkedList<String> historial = ivan.getHistorialPagos();
 
         System.out.println("HISTORIAL DE COMPRAS:");
-        while (!historial.isEmpty()){
-            System.out.println(historial.pop());
+        for (String value : historial){
+            System.out.println(value);
         }
 
         Assertions.assertEquals(1,1);

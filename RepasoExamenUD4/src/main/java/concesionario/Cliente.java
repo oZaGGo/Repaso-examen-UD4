@@ -5,7 +5,7 @@ import java.util.*;
 public class Cliente extends Persona{
     private ArrayList<Coche> coches = new ArrayList<>();
     private int saldo;
-    private Stack<String> historialPagos = new Stack<>();
+    private LinkedList<String> historialPagos = new LinkedList<>();
 
     public Cliente(String nombre, String apellido, String dni, int saldo) {
         super(nombre, apellido, dni);
@@ -17,7 +17,7 @@ public class Cliente extends Persona{
     }
 
     public void insertarPago(String linea, Integer importe){
-        historialPagos.push(linea);
+        historialPagos.addFirst(linea);
         this.saldo-=importe;
     }
 
@@ -25,7 +25,7 @@ public class Cliente extends Persona{
         return coches;
     }
 
-    public Stack<String> getHistorialPagos() {
+    public LinkedList<String> getHistorialPagos() {
         return historialPagos;
     }
 
