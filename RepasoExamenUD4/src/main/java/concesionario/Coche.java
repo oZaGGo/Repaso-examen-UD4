@@ -1,6 +1,8 @@
 package concesionario;
 
-public class Coche {
+import java.util.Comparator;
+
+public class Coche implements Comparable<Coche> {
     private Marca marca;
     private String modelo;
 
@@ -34,5 +36,10 @@ public class Coche {
                 "marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Coche o) {
+        return this.getMarca().getNombre().compareTo(o.getMarca().getNombre()); //Ordenar por nombre de marca
     }
 }

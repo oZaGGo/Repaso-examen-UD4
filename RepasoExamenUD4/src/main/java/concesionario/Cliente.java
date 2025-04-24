@@ -1,8 +1,6 @@
 package concesionario;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
 public class Cliente extends Persona{
     private ArrayList<Coche> coches = new ArrayList<>();
@@ -41,6 +39,7 @@ public class Cliente extends Persona{
 
     @Override
     public String toString() {
+        Collections.sort(coches);
         return "Cliente{" +
                 "coches=" + coches +
                 ", saldo=" + saldo +
