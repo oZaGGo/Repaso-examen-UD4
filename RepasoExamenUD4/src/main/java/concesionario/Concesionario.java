@@ -1,10 +1,8 @@
 package concesionario;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 public class Concesionario {
     private String nombre;
@@ -28,14 +26,16 @@ public class Concesionario {
         //Buscar si el coche existe
         if (cochesDisponibles.containsKey(coche)){ //Si el coche existe
             if (cochesDisponibles.get(coche).equals(importe)){ //Si el importe se corresponde con el precio
-                    //Comprar el coche
-                    String mensaje = "Coche: " + coche.getMarca().getNombre() + " " + coche.getModelo() + " por " + importe + "€ el " + LocalDate.now();
-                    clientes.add(cliente); //Si el mismo cliente compra 2 veces se añade solo 1 vez
-                    transacciones.put(mensaje,cliente);
-                    cochesDisponibles.remove(coche);
-                    cliente.insertarCoche(coche); //Añadir el coche a la lista de coches del cliente
+                //Comprar el coche
+                String mensaje = "Coche: " + coche.getMarca().getNombre() + " " + coche.getModelo() + " por " + importe + "€ el " + LocalDate.now();
+                clientes.add(cliente); //Si el mismo cliente compra 2 veces se añade solo 1 vez
+                transacciones.put(mensaje,cliente);
+                cochesDisponibles.remove(coche);
+                cliente.insertarCoche(coche); //Añadir el coche a la lista de coches del cliente
+                String linea = "-" + importe + "€ el " + LocalDate.now();
+                cliente.insertarPago(linea, importe);
             }else {
-                throw new Exception("El importe es erroneo! Introduce el importe para comprar el coche exacto.");
+                throw new Exception("El importe es erroneo! Introduce el importe EXACTO para comprar el coche");
             }
         }else{
             throw new Exception("No tenemos ese coche!");

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -17,7 +18,7 @@ public class Testeos {
 
         //Creo un cliente
 
-        Cliente ivan = new Cliente("Ivan", "Diaz Miragaya","66666666x");
+        Cliente ivan = new Cliente("Ivan", "Diaz Miragaya","66666666x",500000);
 
         System.out.println("CLIENTE: ");
 
@@ -76,9 +77,21 @@ public class Testeos {
 
         HashMap<String, Cliente> transacciones = concesionario.getTransacciones();
 
+        System.out.println("TRANSACCIONES:");
         for (String key : transacciones.keySet()){
             System.out.println("Cliente: " + transacciones.get(key).getNombre() + " " + transacciones.get(key).getApellido());
             System.out.println(key);
+        }
+        System.out.println();
+
+
+        //Imprimir el historial del cliente
+
+        Stack<String> historial = ivan.getHistorialPagos();
+
+        System.out.println("HISTORIAL DE COMPRAS:");
+        while (!historial.isEmpty()){
+            System.out.println(historial.pop());
         }
 
         Assertions.assertEquals(1,1);
