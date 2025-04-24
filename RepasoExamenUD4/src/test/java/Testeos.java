@@ -77,8 +77,7 @@ public class Testeos {
         HashMap<String, Cliente> transacciones = concesionario.getTransacciones();
 
         for (String key : transacciones.keySet()){
-            Cliente aux = transacciones.get(key);
-            System.out.println("Cliente: " + aux.getNombre() + " " + aux.getApellido());
+            System.out.println("Cliente: " + transacciones.get(key).getNombre() + " " + transacciones.get(key).getApellido());
             System.out.println(key);
         }
 
