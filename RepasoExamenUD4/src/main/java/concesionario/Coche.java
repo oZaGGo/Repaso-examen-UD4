@@ -5,13 +5,15 @@ import java.util.Comparator;
 public class Coche implements Comparable<Coche> {
     private Marca marca;
     private String modelo;
+    private Combustible combustible;
 
     public Coche() {
     }
 
-    public Coche(Marca marca, String modelo) {
+    public Coche(Marca marca, String modelo, Combustible combustible) {
         this.marca = marca;
         this.modelo = modelo;
+        this.combustible = combustible;
     }
 
     public Marca getMarca() {

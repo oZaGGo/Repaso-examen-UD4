@@ -1,5 +1,7 @@
 package concesionario;
 
+import utilidades.Formateador;
+
 import java.util.Objects;
 
 public abstract class Persona {
@@ -11,8 +13,8 @@ public abstract class Persona {
     }
 
     public Persona(String nombre, String apellido, String dni) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+        this.nombre = Formateador.nameFormatter(nombre);
+        this.apellido = Formateador.nameFormatter(apellido);
         this.dni = dni;
     }
 

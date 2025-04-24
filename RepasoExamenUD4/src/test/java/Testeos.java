@@ -1,7 +1,4 @@
-import concesionario.Cliente;
-import concesionario.Coche;
-import concesionario.Concesionario;
-import concesionario.Marca;
+import concesionario.*;
 import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
@@ -32,14 +29,14 @@ public class Testeos {
 
         //Creo coches
 
-        Coche coche1 = new Coche(mercedes,"SSL220");
-        Coche coche2 = new Coche(mercedes,"SSL320");
-        Coche coche3 = new Coche(ford,"Fiesta");
-        Coche coche4 = new Coche(bmw,"e45");
+        Coche coche1 = new Coche(mercedes,"SSL220", Combustible.GASOLINA);
+        Coche coche2 = new Coche(mercedes,"SSL320", Combustible.GASOLINA);
+        Coche coche3 = new Coche(ford,"Fiesta", Combustible.GASOLINA);
+        Coche coche4 = new Coche(bmw,"e45", Combustible.ELECTRICO);
 
         //Creo el concesionario
 
-        Concesionario concesionario = new Concesionario("Gran Turismo");
+        Concesionario concesionario = new Concesionario("gran turismo");
 
         //Añado coches al concesionario
 
@@ -75,10 +72,17 @@ public class Testeos {
 
         HashMap<Cliente, List<String>> transacciones = concesionario.getTransacciones();
 
-        System.out.println("TRANSACCIONES:");
-        for (Cliente key : transacciones.keySet()){
-            System.out.println("Cliente: " + key.getNombre() + " " + key.getApellido());
-            for (String value : transacciones.get(key)){
+        concesionario.imprimirHistorial();
+
+        //Imprimir con iterator
+
+        Iterator<Cliente> i = transacciones.keySet().iterator();
+
+        System.out.println("TRANSACCIONES USANDO ITERATOR:");
+        while (i.hasNext()){
+            Cliente aux = i.next();
+            System.out.println("Cliente: " + aux.getNombre() + " " + aux.getApellido());
+            for (String value : transacciones.get(aux)){
                 System.out.println(value);
             }
         }
@@ -87,12 +91,7 @@ public class Testeos {
 
         //Imprimir el historial del cliente
 
-        LinkedList<String> historial = ivan.getHistorialPagos();
-
-        System.out.println("HISTORIAL DE COMPRAS:");
-        for (String value : historial){
-            System.out.println(value);
-        }
+        ivan.imprimirHistorial();
 
         Assertions.assertEquals(1,1);
     }

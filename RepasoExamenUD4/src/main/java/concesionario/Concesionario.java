@@ -1,9 +1,11 @@
 package concesionario;
 
+import utilidades.Formateador;
+
 import java.time.LocalDate;
 import java.util.*;
 
-public class Concesionario {
+public class Concesionario implements Imprimir {
     private String nombre;
     private HashSet<Cliente> clientes = new HashSet<>(); //Los clientes se distinguen por DNI
     private HashMap<Coche,Integer> cochesDisponibles = new HashMap<>();
@@ -14,7 +16,7 @@ public class Concesionario {
     }
 
     public Concesionario(String nombre) {
-        this.nombre = nombre;
+        this.nombre = Formateador.nameFormatter(nombre);
     }
 
     public void insertarCocheDisponible(Coche coche, Integer precio){
@@ -71,5 +73,17 @@ public class Concesionario {
                 ", cochesDisponibles=" + cochesDisponibles +
                 ", transacciones=" + transacciones +
                 '}';
+    }
+
+    @Override
+    public void imprimirHistorial() {
+        System.out.println("TRANSACCIONES:");
+        for (Cliente key : transacciones.keySet()){
+            System.out.println("Cliente: " + key.getNombre() + " " + key.getApellido());
+            for (String value : transacciones.get(key)){
+                System.out.println(value);
+            }
+        }
+        System.out.println();
     }
 }

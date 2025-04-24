@@ -2,7 +2,7 @@ package concesionario;
 
 import java.util.*;
 
-public class Cliente extends Persona{
+public class Cliente extends Persona implements Imprimir{
     private ArrayList<Coche> coches = new ArrayList<>();
     private int saldo;
     private LinkedList<String> historialPagos = new LinkedList<>();
@@ -48,5 +48,14 @@ public class Cliente extends Persona{
                 ", apellido='" + apellido + '\'' +
                 ", dni='" + dni + '\'' +
                 '}';
+    }
+
+    @Override
+    public void imprimirHistorial() {
+        System.out.println("HISTORIAL DE COMPRAS:");
+        for (String value : historialPagos){
+            System.out.println(value);
+        }
+        System.out.println();
     }
 }
